@@ -50,6 +50,11 @@ import java.util.Set;
 /**
  * Resolution state for a given module.
  */
+
+
+/**
+ * Resolution state for a given module.
+ */
 class ModuleResolveState implements CandidateModule {
     private final ComponentMetaDataResolver metaDataResolver;
     private final IdGenerator<Long> idGenerator;

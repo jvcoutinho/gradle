@@ -30,6 +30,16 @@ import org.gradle.internal.component.model.ComponentResolveMetadata;
  * target component exists. Checking if it does exist is currently done by fetching metadata,
  * but we could have a cheaper strategy (HEAD request, ...).
  */
+
+
+/**
+ * This class wraps knowledge about a potential edge to a component. It's called potential,
+ * because when the edge is created we don't know if the target component exists, and, since
+ * the edge is created internally by the engine, we don't want to fail if the target component
+ * doesn't exist. This means that the edge would effectively be added if, and only if, the
+ * target component exists. Checking if it does exist is currently done by fetching metadata,
+ * but we could have a cheaper strategy (HEAD request, ...).
+ */
 class PotentialEdge {
     final EdgeState edge;
     final ModuleVersionIdentifier toModuleVersionId;

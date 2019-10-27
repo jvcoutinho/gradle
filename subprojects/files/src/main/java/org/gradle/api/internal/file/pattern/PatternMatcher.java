@@ -18,6 +18,8 @@ package org.gradle.api.internal.file.pattern;
 
 import com.google.common.collect.Lists;
 
+import java.util.ArrayList;
+
 import java.util.List;
 
 public abstract class PatternMatcher {
@@ -58,7 +60,12 @@ public abstract class PatternMatcher {
     }
 
     private static final class Or extends PatternMatcher {
-        private final List<PatternMatcher> parts = Lists.newLinkedList();
+        <<<<<<< MINE
+private final List<PatternMatcher> parts = Lists.newLinkedList();
+=======
+private final List<PatternMatcher> parts = new ArrayList<PatternMatcher>();
+>>>>>>> YOURS
+
 
         public Or(PatternMatcher patternMatcher, PatternMatcher other) {
             parts.add(patternMatcher);
@@ -83,7 +90,12 @@ public abstract class PatternMatcher {
     }
 
     private static final class And extends PatternMatcher {
-        private final List<PatternMatcher> parts = Lists.newLinkedList();
+        <<<<<<< MINE
+private final List<PatternMatcher> parts = Lists.newLinkedList();
+=======
+private final List<PatternMatcher> parts = new ArrayList<PatternMatcher>();
+>>>>>>> YOURS
+
 
         public And(PatternMatcher patternMatcher, PatternMatcher other) {
             parts.add(patternMatcher);

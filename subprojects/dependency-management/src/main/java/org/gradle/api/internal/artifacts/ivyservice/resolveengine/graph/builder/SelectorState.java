@@ -60,6 +60,17 @@ import java.util.List;
  * 3. The selector was part of resolution to a particular module version.
  * In this case {@link #resolved} will be `true` and {@link ModuleResolveState#getSelected()} will point to the selected component.
  */
+
+
+/**
+ * Resolution state for a given module version selector.
+ *
+ * There are 3 possible states:
+ * 1. The selector has been newly added to a `ModuleResolveState`. In this case {@link #resolved} will be `false`.
+ * 2. The selector failed to resolve. In this case {@link #failure} will be `!= null`.
+ * 3. The selector was part of resolution to a particular module version.
+ * In this case {@link #resolved} will be `true` and {@link ModuleResolveState#getSelected()} will point to the selected component.
+ */
 class SelectorState implements DependencyGraphSelector, ResolvableSelectorState {
     private final Long id;
     private final DependencyState dependencyState;
@@ -106,6 +117,18 @@ class SelectorState implements DependencyGraphSelector, ResolvableSelectorState 
         this.isProjectSelector = getSelector() instanceof ProjectComponentSelector;
         this.attributeDesugaring = resolveState.getAttributeDesugaring();
     }
+
+    SelectorState(Long id, DependencyState dependencyState, DependencyToComponentIdResolver resolver, ResolveState resolveState, ModuleIdentifier targetModuleId) {
+        this.id = id;
+        this.resolver = resolver;
+        this.targetModule = resolveState.getModule(targetModuleId);
+        update(dependencyState);
+        this.dependencyState = dependencyState;
+        this.versionConstraint = resolveState.resolveVersionConstraint(dependencyState.getDependency().getSelector());
+        this.isProjectSelector = getSelector() instanceof ProjectComponentSelector;
+        this.attributeDesugaring = resolveState.getAttributeDesugaring();
+    }
+
 
     @Override
     public boolean isProject() {
